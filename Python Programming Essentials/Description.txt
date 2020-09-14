@@ -1,0 +1,31 @@
+The project consists of multiple problems. Each problem will utilize functions you wrote for the previous problems, so we strongly suggest that implement and test these
+functions in the given order.
+
+Problem 1: Computing the number of days in a month
+First, you will write a function called days_in_month that takes two integers: a year and a month. The function should return the number of days in that month. You may assume that both inputs are valid (in other words, you do not need to write any code to check whether or not they are reasonable, you can just assume that the month input is a number between 1 and 12 and the year input is a number between \color{red}{\verb|datetime.MINYEAR|}datetime.MINYEAR and \color{red}{\verb|datetime.MAXYEAR|}datetime.MAXYEAR).
+
+
+You do not need to check that the inputs are within the proper ranges. You can assume that any function that calls this one will already have checked that.
+For this and all subsequent problems, be sure to familiarize yourself with the datetime module and make use of the capabilities that it provides.
+One way in which to determine the number of days in a month is to subtract the first of the given month from the first of the next month. The result should be the number of days in the given month.
+
+Problem 2: Checking if a date is valid
+Next, you will write a function called is_valid_date that takes three integers: a year, a month, and a day. The function should return \color{red}{\verb|True|}True if that date is valid and \color{red}{\verb|False|}False otherwise. This function should not assume that the inputs are valid. Rather, this function should check that all three inputs combine to form a valid date, with a year between \color{red}{\verb|datetime.MINYEAR|}datetime.MINYEAR and \color{red}{\verb|datetime.MAXYEAR|}datetime.MAXYEAR, a month between 1 and 12, and a day between 1 and the number of days in the given month. Notice that the function \color{red}{\verb|days_in_month|}days_in_month that you wrote for Part 1 will be useful here!
+
+
+Do not forget to make use of any function(s) that you have already written!
+This function should just consist of conditional checks that each input is in the proper range.
+Problem 3: Computing the number of days between two dates
+Now that we have a way to check if a given date is valid, you will write a function called days_between that takes six integers (year1, month1, day1, year2, month2, day2) and returns the number of days from an earlier date (year1-month1-day1) to a later date (year2-month2-day2). If either date is invalid, the function should return 0. Notice that you already wrote a function to determine if a date is valid or not! If the second date is earlier than the first date, the function should also return 0.
+
+Hints:
+
+Be sure to first check that all of the inputs are valid. Do not repeat code. Make sure you reuse things that you have already written.
+Make sure to check the cases where the function is supposed to return 0.
+Problem 4: Calculating a person's age in days
+Finally, you will write a function called age_in_days that takes three integers as input: the year, month, and day of a persons birthday. The function should return that person's age in days as of today. The function should return 0 if the input date is invalid (remember you have a function to check that!). The function should also return 0 if the input date is in the future.
+
+Remember that you already have a function that returns the number of days between two dates that you wrote in Part 3. Which two dates could you pass to that function to solve this problem?
+
+You need to write the code that implements this function.
+
