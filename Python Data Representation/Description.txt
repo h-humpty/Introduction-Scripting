@@ -1,0 +1,80 @@
+In many scripting tasks you will need to process files. You often write programs that process different user inputs from files. It is also convenient to store configuration information for your programs in files so that the user does not have to specify the configuration over and over again. When files contain textual information, you will store the contents as strings within your programs and perform whatever string manipulation you need to do in order to accomplish the task at hand.
+
+In this project you will find differences in the contents of two files. In particular, you will find the location of the first character that differs between two input files. You might want to do something like this if you are comparing how something has changed. It is convenient to present to the user the first difference to allow them to see what has happened. This could form the basis of a larger program that could find all of the differences between two files. For example, if you were to expand the program, you might then want to find the next difference after the user has read the first difference.
+
+Problem 1: Finding the first difference between two lines
+First, you will write a function called \color{red}{\verb|singleline_diff|}singleline_diff that takes two single line strings. You may assume that both strings are always a single line and do not contain any newline characters. The function should return the index of the first character that differs between the two lines. If the lines are the same, the function should return the constant \color{red}{\verb!IDENTICAL!}IDENTICAL, which is already defined to be -1−1 in the provided template file.
+
+If the lines are different lengths, but the entire shorter line matches the beginning of the longer line, then the first difference is located at the index that is one past the last character in the shorter line. In other words, no character after the end of the shorter line is defined to be different than whatever character exists in the longer line at that location.
+
+Hints:
+
+You do not need to check whether or not the two inputs are a single line or not. You may assume that they are.
+You should first check the lengths of the two inputs and determine the length of the shorter line.
+Look for differences in the lines up to the last character in the shorter line.
+If you do not find any differences, think about what you should do in the two possible cases: (1) the lines are the same length and (2) the lines are different lengths.
+Problem 2: Presenting the differences between two lines in a nicely formatted way
+Next, you will write a function called \color{red}{\verb|singleline_diff_format|}singleline_diff_format that takes two single line strings and the index of the first difference and will generate a formatted string that will allow a user to clearly see where the first difference between two lines is located. A user is likely going to want to see where the difference is in the context of the lines, not just see a number. Your function will return a three line string that looks as follows:
+
+abcd
+==^
+abef
+
+The format of these three lines is:
+
+The complete first line.
+A separator line that consists of repeated equal signs ("=") up until the first difference. A "^" symbol indicates the position of the first difference.
+The complete second line.
+If either line contains a newline or carriage return character ("\n" or "\r") then the function returns an empty string (since the lines are not single lines and the output format will not make sense to a person reading it).
+
+If the index is not a valid index that could indicate the position of the first difference of the two input lines, the function should also return an empty string (again because the output would not make sense otherwise). It must therefore be between 0 and the length of the shorter line. Note that you do not need to check whether the index actually identifies the correct location of the first difference, as that should have been computed correctly prior to calling this function.
+
+Hints:
+
+Unlike the previous function, you do need to check whether the inputs are a single line this time.
+Think about the string operations that you have learned about when constructing the separator line. Python provides mechanisms that allow you to do this relatively easily.
+Make sure you add the appropriate newline characters to your output so that it is formatted correctly. In particular, there needs to be a newline at the end of each of the three lines.
+Remember that this function is not checking whether or not the input index correctly identifies where the first difference is, it is simply displaying the difference assuming that it does. It is the job of \color{red}{\verb|singleline_diff|}singleline_diff to correctly compute the index.
+Problem 3: Finding the first difference across multiple lines
+Next, you will write a function called \color{red}{\verb|multiline_diff|}multiline_diff that takes two lists of single line strings. You may assume that the strings within the lists are all single lines. The function returns a tuple that indicates the line and index within that line where the first difference between the two lists occurs. If the contents of the two lists are the same, the function should return the tuple \color{red}{\verb!(IDENTICAL, IDENTICAL)!}(IDENTICAL, IDENTICAL). (Recall that the constant \color{red}{\verb!IDENTICAL!}IDENTICAL is already defined to be -1−1 in the provided template file.)
+
+The definition of whether two lines are the same or different and the resulting index for location of a difference is the same as it was for \color{red}{\verb!singleline_diff!}singleline_diff.
+
+The line on which the first difference occurs should be the index into the input lists that correspond to that line. If the input lists are different lengths, but the entire shorter list matches the beginning of the longer list, the first difference is located at the line that is one past the last line in the shorter list at index 0. In other words, no character on the line after the end of the shorter list is defined to be different than whatever character exists on that line in the longer list.
+
+
+
+Hints:
+
+You do not need to check that each string in the input lists are single lines.
+Do not forget to make use of any function(s) you have already written!
+Notice the similarity between this function and \color{red}{\verb!singleline_diff!}singleline_diff. Make sure you think carefully about how to draw upon lessons you already learned when implementing that function.
+Problem 4: Getting lines from a file
+Next, you will write a function called \color{red}{\verb|get_file_lines|}get_file_lines that takes a filename as input. You may assume that the input names a file that exists and is readable. The function returns a list of single line strings, where each element of the list is one line from the file. The strings within the returned list should not contain any newline or carriage return ("\n" or "\r") characters.
+
+Hints:
+
+You do not need to check that the file exists or is readable. You may assume both.
+Note that the Python functions for reading lines from files do not remove any line ending characters. You will need to do this yourself. Think about how you would find and remove them using what you have learned.
+Always remember to close files when you are done using them!
+Problem 5: Finding and formatting the first difference between two files
+Finally, you will write a function called \color{red}{\verb|file_diff_format|}file_diff_format that takes two filenames as input. You may assume that the inputs name files that exist and are readable. The function returns a formatted string that will allow a user to clearly see where the first difference between two files is located. Your function will return a four line string that looks as follows:
+
+{\verb!Line 3:!}\\{\verb!abcd!}\\{\verb!==^!}\\{\verb!abef!}Line 3:
+abcd
+==^
+abef
+
+The format of these four lines is:
+
+A line that indicates which line the first difference occurs on (Line XXX:) where "XXX" is the line number (starting from 0).
+The complete line XXX from the first file
+A separator line that consists of repeated equal signs ("=") up until the first difference. A "^" symbol indicates the position of the first difference.
+The complete line XXX from the second file.
+The format of the second through fourth lines should be as they are defined for \color{red}{\verb|singleline_diff_format|}singleline_diff_format. The location of the first difference between the files should be defined in the same way that it was for \color{red}{\verb|multiline_diff|}multiline_diff.
+
+If the two files are identical, the function should instead return the string "No differences\n".
+
+Hints:
+
+Do not forget to make use of any function(s) you have already written!
